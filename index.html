@@ -14,12 +14,94 @@
     <script type="text/javascript">
         $(document).ready(function () {
             $.backstretch('images/ferret.jpg');
-            $('#tags').imgAreaSelect({ minWidth: 50, minHeight: 50, handles: true });
+            var select = $('#tags').imgAreaSelect({
+                instance: true,
+                minWidth: 50,
+                minHeight: 50,
+                handles: true,
+                keys: true,
+                parent: '#tags',
+                onSelectStart: function(){
+                    $('.approve').remove();
+                },
+                onSelectChange: function(){
+                    $('.approve').remove();
+                },
+                onSelectEnd: function(){
+                    if($('.imgareaselect-selection').parent().is(':visible')){
+
+                        console.log(select.getSelection(false));
+
+                        // Create a div behind the selection div
+                        var divHeight,
+                            divWidth,
+                            divPosition,
+                            divLeft,
+                            divTop,
+                            $selectionDiv;
+
+                        $selectionDiv = $('.imgareaselect-selection').parent();
+                        divHeight   = $selectionDiv.height() + 30;
+                        divWidth    = $selectionDiv.width();
+                        divPosition = $selectionDiv.css('position');
+                        divLeft     = $selectionDiv.css('left');
+                        divTop      = $selectionDiv.css('top');
+
+                        var div = $(document.createElement('div'));
+                        div.addClass('approve');
+                        div.css({
+                            height: divHeight,
+                            width: divWidth,
+                            position: divPosition,
+                            left: divLeft,
+                            top: divTop
+                        });
+
+                        // Get the div to append to
+                        div.appendTo('#tags');
+
+                        // Create a approve button div
+                        var approveInput = $(document.createElement('div'));
+                        approveInput.addClass('approveInput');
+                        approveInput.css({
+                            height      : '30px',
+                            width       : '120px',
+                            position    : 'absolute',
+                            bottom      : '0px',
+                            right       : '0px',
+                            background  : '#000',
+                            cursor      : 'pointer'
+                        });
+                        approveInput.appendTo(div);
+
+                        $('<input />').attr({
+                            'type':'text',
+                            'name':'personName'
+                        }).css({
+                            height:'25px'
+                        }).addClass(
+                            'inputfield'
+                        ).appendTo(
+                            approveInput
+                        ).focus();
+
+                    }
+                }
+            });
+
+
+
         });
     </script>
 </head>
 
 <body>
+<!-- original width:400; height: 300; -->
+<!-- resized width:1024; height: 768; -->
+<!-- 1024 / 400 = 2,56 | 768 / 300 = 2,56x -->
+
+<!-- original selection width: 75; height: 75; -->
+<!-- new selection width: 75 x 2,56 = 192 -->
 
 <div id="tags"></div>
 
