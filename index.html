@@ -96,12 +96,65 @@
 </head>
 
 <body>
+<!--
+
+Berekening voor tags width, height position
+
+Info:
+
+Browsersize    = 1024 x 768
+Original image =  400 x 300
+New image      = 1024 x 768
+Ratio          = 1024 / 400 = 2,56
+Image top      = -47,5px
+Image left     = 0px
+------------------------------------------------------------
+Selection position & info:
+
+selection top    = 210 == y1
+y2               = y1 + height = 402
+select left      = 425 == x1
+x2               = x1 + width = 617
+selection width  = 192
+selection height = 192
+------------------------------------------------------------
+Original position:
+
+IF image TOP < 0:
+original top     = (210 + 47,5) / 2,56 = 100,58 ~ 101
+y2               == y1 + height == 101 + 75 = 176
+original left    = 424 / 2,56 = 165,63 ~ 166
+x2               == x1 + width == 166 + 75 = 241
+original width   = 192 / 2,56 = 75
+original height  = 192 / 2,56 = 75
+
+IF image left < 0:
+original top     = 210 / 2,56
+y2               == y1 + height
+original left    = (424 + imageleft) / 2,56
+x2               = x1 + width
+original width   = 192 / 2,56 = 75
+original height  = 192 / 2,56 = 75
+
+-->
+
 <!-- original width:400; height: 300; -->
 <!-- resized width:1024; height: 768; -->
 <!-- 1024 / 400 = 2,56 | 768 / 300 = 2,56x -->
 
 <!-- original selection width: 75; height: 75; -->
 <!-- new selection width: 75 x 2,56 = 192 -->
+
+<!-- original top: 101px ; left: 166px -->
+<!-- new top: 101 x 2,56 = 258,56 ~ 259 -->
+<!-- newleft: 166 x 2,56 = 424,96 ~ 425 -->
+<!--
+
+<!-- new x1: 425 ; original x1: 166 -->
+<!-- new x2: 617 ; original x2: 241 -->
+
+<!-- new y1: 210 ; original y1: 101 -->
+<!-- new y2: 401 ; original y2: 176 -->
 
 <div id="tags"></div>
 
